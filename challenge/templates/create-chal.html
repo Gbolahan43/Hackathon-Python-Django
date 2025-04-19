@@ -1,0 +1,51 @@
+{% extends "introduction/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ challenge.name }}</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>{{ challenge.description }}</p>
+            <p><strong>Points:</strong> {{ challenge.point }}</p>
+            
+            <div class="status-info mb-3">
+                {% if user_challenge.is_solved %}
+                    <div class="alert alert-success">
+                        You've solved this challenge! 🎉
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        Challenge status: {% if user_challenge.is_live %}Active{% else %}Inactive{% endif %}
+                    </div>
+                    {% if user_challenge.no_of_attempt > 0 %}
+                        <p>Number of attempts: {{ user_challenge.no_of_attempt }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            
+            {% if not user_challenge.is_solved %}
+                {% if user_challenge.is_live %}
+                    <div class="mb-3">
+                        <h4>Challenge Environment</h4>
+                        <p>Access your challenge at: <a href="{{ challenge_url }}" target="_blank">{{ challenge_url }}</a></p>
+                    </div>
+                    
+                    <form method="post" class="mb-3">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="flag">Submit Flag:</label>
+                            <input type="text" class="form-control" id="flag" name="flag" placeholder="Enter the flag">
+                        </div>
+                        <button type="submit" name="submit_flag" class="btn btn-primary">Submit</button>
+                    </form>
+                {% else %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="start_challenge" class="btn btn-success">Start Challenge</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

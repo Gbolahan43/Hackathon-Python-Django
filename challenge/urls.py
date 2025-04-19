@@ -3,4 +3,5 @@ from .views import *
 
 urlpatterns = [
     path('<str:challenge>', DoItFast.as_view(), name='do-it-fast'),
+    path('', include('introduction.urls')),
 ]
