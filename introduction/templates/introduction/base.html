@@ -651,31 +651,37 @@
               <i class="fas fa-align-justify"></i>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav navbar-nav ml-auto">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+              <ul class="navbar-nav align-items-center gap-2">
+                
+                <!-- Theme Toggle -->
                 <li class="nav-item">
-                  <button class="nav-link dark" href='{% url "logout" %}?next=/' id="stylesheet-toggle" onclick="swapStyleSheet()"
-                    >Theme</button
+                  <button
+                    class="btn btn-outline-secondary btn-sm"
+                    id="stylesheet-toggle"
+                    onclick="swapStyleSheet()"
                   >
+                    Toggle Theme
+                  </button>
                 </li>
-
-
+            
+                <!-- Authentication -->
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href='{% url "logout" %}?next=/'
-                    >Logout</a
-                  >
+                  <a class="btn btn-outline-danger btn-sm" href="{% url 'logout' %}?next=/">
+                    Logout
+                  </a>
                 </li>
-
                 {% else %}
-
                 <li class="nav-item">
-                  <a class="nav-link" href="/login">Login</a>
+                  <a class="btn btn-outline-success btn-sm" href="/login">
+                    Login
+                  </a>
                 </li>
                 {% endif %}
-
               </ul>
             </div>
+            
           </div>
         </nav>
 

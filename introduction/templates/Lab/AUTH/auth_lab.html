@@ -1,20 +1,27 @@
 {% extends "introduction/base.html" %}
-{% block content %}
+
 {% block title %}
-<title>BROKEN AUTH LAB</title>
+<title>Broken Auth Lab | Challenge</title>
 {% endblock %}
 
-<div class="jumbotron">
-    <h4 style="text-align:center"> Can You Log in as other user?</h4>
-    <div class="login" style="text-align:center">
-        <button style="margin-top:20px" class="btn btn-info" onclick="location.href = '/auth_lab/signup'"> Sign
-            up</button>
-        <button style="margin-top:20px" class="btn btn-info" onclick="location.href = '/auth_lab/login'"> Log
-            in</button>
+{% block content %}
+<div class="container min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="card shadow-lg p-4 text-center" style="max-width: 500px; width: 100%;">
+        <div class="card-body">
+            <h3 class="text-primary mb-3">Broken Auth Challenge</h3>
+            <p class="mb-4 text-muted">Can you log in as another user?</p>
+
+            <div class="d-grid gap-3">
+                <button class="btn btn-outline-primary" onclick="location.href='/auth_lab/signup'">Sign Up</button>
+                <button class="btn btn-primary" onclick="location.href='/auth_lab/login'">Log In</button>
+            </div>
+
+            {% if err_msg %}
+            <div class="alert alert-danger mt-4" role="alert">
+                <pre class="mb-0">{{ err_msg }}</pre>
+            </div>
+            {% endif %}
+        </div>
     </div>
 </div>
-<br>
-<i>
-    <pre>{{ err_msg }}</pre>
-</i>
 {% endblock %}

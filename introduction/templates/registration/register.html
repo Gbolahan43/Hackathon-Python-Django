@@ -1,25 +1,58 @@
 {% extends "introduction/base.html" %}
-{% block content %} 
-
 {% load crispy_forms_tags %}
 
-<div style="display: flex; flex-direction: row; flex-wrap: wrap">
-<div class="card mx-auto" style="width: 35rem; margin: 10px">
-<div class="conatiner border border-info rounded">
+{% block title %}
+<title>Register | Broken Auth Lab</title>
+{% endblock %}
 
-	<!--Register--> 
-	<div class="container py-5">
-		<h1 style="color: #26282b;">Register</h1>
-		<form method="POST">
-			{% csrf_token %}
-			{{ register_form|crispy }}                    
-			<button class="btn btn-primary" type="submit">Register</button>
-		</form>
-		<br>
-		<p style="color:#26282b;">If you already have an account, <a href="/login" style="color:#027bff">Login</a> instead.</p>
-	</div>
-</div>
-</div>
-</div>
+{% block content %}
+<div class="container min-vh-100 d-flex align-items-center justify-content-center bg-light">
+    <div class="card shadow-lg border-0 rounded-4" style="width: 100%; max-width: 500px;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-dark">Create an Account</h2>
+                <p class="text-muted mb-0">Join the lab and get started</p>
+            </div>
 
+            <form method="POST" novalidate>
+                {% csrf_token %}
+
+                <!-- Suspense Spinner -->
+                <div id="loadingSpinner" class="text-center mb-3" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+                {{ register_form|crispy }}
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm w-100">
+                        Register
+                    </button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4">
+                <span class="text-muted">Already have an account?</span>
+                <a href="/login" class="fw-medium text-decoration-none text-primary ms-1">Log in</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const spinner = document.getElementById("loadingSpinner");
+
+        if (form) {
+            form.addEventListener("submit", function () {
+                spinner.style.display = "block";
+            });
+        }
+    });
+</script>
 {% endblock %}
