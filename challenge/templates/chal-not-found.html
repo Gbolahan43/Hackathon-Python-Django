@@ -1,27 +1,8 @@
 {% extends "introduction/base.html" %}
 {% block content %}
-<!-- <div class="content">
+<div class="content">
 
     <h1>Challenge not found</h1>
 
-</div> -->
-
-<div class="content">
-    <div class="title">
-        <h2>Challenge Not Found</h2>
-    </div>
-    <div class="box">
-        <p>Sorry, the challenge "{{ challenge_name }}" could not be found.</p>
-        <p>This might be because:</p>
-        <ul>
-            <li>The challenge hasn't been created yet</li>
-            <li>There might be a typo in the challenge name</li>
-            <li>The challenge has been removed</li>
-        </ul>
-        
-        <p>Please check the available challenges or contact an administrator if you believe this is an error.</p>
-        
-        <a href="{% url 'homepage' %}" class="btn btn-primary">Return to Homepage</a>
-    </div>
 </div>
 {% endblock content %}

@@ -1,46 +1,41 @@
 {% extends "introduction/base.html" %}
 {% load static %}
-{% block content %}
+
 {% block title %}
-<title>Broken Access Control.</title>
+<title>Broken Access Control - Lab 1</title>
 {% endblock %}
 
-<div class="jumbotron">
-    <h4 style="text-align:center"> Admins Have the Secretkey</h4>
-    <div class="login">
-        <form method="post" action="/broken_access_lab_1">
+{% block content %}
+<div class="container" style="max-width: 600px; margin: 2rem auto; padding: 2rem; background-color: #f9f9f9; border-radius: 8px;">
+    <h3 style="text-align: center; margin-bottom: 1.5rem; color: black;">Admins Have the Secret Key</h3>
 
-            <input id="input" type="text" name="name" placeholder="User Name"><br>
-            <input id="input" type="password" name="pass" placeholder="Password"><br>
-            <button style="margin-top:20px" class="btn btn-info" type="submit"> Log in</button>
+    <form method="post" action="/broken_access_lab_1" style="display: flex; flex-direction: column; gap: 1rem;">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Username" required style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ccc;">
+        <input type="password" name="pass" placeholder="Password" required style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ccc;">
+        <button class="btn btn-info" type="submit" style="margin-top: 0.5rem;">Log In</button>
+    </form>
 
+    <div style="margin-top: 2rem;">
+        {% if username %}
+            <p><strong>Logged in as:</strong> <code>{{ username }}</code></p>
+        {% endif %}
 
-        </form>
+        {% if data %}
+            <p><strong>Your Secret Key is:</strong> <code>{{ data }}</code></p>
+        {% endif %}
+
+        {% if not_admin %}
+            <p><code>{{ not_admin }}</code></p>
+        {% endif %}
+
+        {% if no_creds %}
+            <p style="color: red;"><strong>Please provide credentials.</strong></p>
+        {% endif %}
+    </div>
+
+    <div style="text-align: right; margin-top: 2rem;">
+        <button class="btn btn-info" type="button" onclick="window.location.href='/ba'">Back to Lab Details</button>
     </div>
 </div>
-<div class="container">
-    {% if username %}
-    <h2>Logged in as user: <code>{{username}}</code></h2>
-    {% endif %}
-
-    {% if data %}
-    <h2>Your Secret Key is <code>{{data}}</code></h2>
-    {% endif %}
-
-    {% if not_admin %}
-    <h2><code>{{not_admin}}</code></h2>
-    {% endif %}
-
-    {% if no_creds %}
-    <h2>Please Provide Credentials</h2>
-    {% endif %}
-
-</div>
-
-<br>
-<div align="right"> <button class="btn btn-info" type="button" onclick="window.location.href='/ba'">Back to Lab
-        Details</button></div>
-
-</p>
-
 {% endblock %}

@@ -68,7 +68,7 @@ ROOT_URLCONF = 'pygoat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -155,7 +155,6 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID=3
 
-
 #Social Account Providers
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -171,9 +170,3 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SECRET_COOKIE_KEY = "PYGOAT"
 CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000","http://0.0.0.0:8000","http://172.16.189.10"]
-
-# Auto-create username from email
-SOCIALACCOUNT_AUTO_SIGNUP = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_EMAIL_REQUIRED = True
-SOCIALACCOUNT_EMAIL_REQUIRED = False
