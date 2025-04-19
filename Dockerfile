@@ -8,7 +8,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Install dependencies for psycopg2 with specific versions and clean up in one layer
-RUN apt-get update && apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install \
     dnsutils=1:9.11.5.P4+dfsg-5.1+deb10u11 \
     libpq-dev=11.16-0+deb10u1 \
     python3-dev=3.12.4 \
